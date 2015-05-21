@@ -2,8 +2,8 @@
 /.project
 /.settings
 /target
+/.m2
 
-/settings.xml
 /doc
 
 .DS_Store

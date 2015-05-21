@@ -1,0 +1,16 @@
+itemGroups:
+    woolGroup: 
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOL
+        allDataTypes: 1
+    diamondGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: DIAMOND
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: DIAMOND_BLOCK
+              relativeValue: 9

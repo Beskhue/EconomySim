@@ -1,0 +1,85 @@
+name: EconomySim
+main: org.kepow.economysim.EconomySim
+version: 0.1
+description: Dynamic economy simulator and shopping interface.
+author: Beskhue
+authors: [Beskhue]
+depend: [Vault]
+softdepend: [Citizens]
+commands:
+  eslist:
+    description: List all available shops.
+    usage: /eslist
+    permissions: economysim.list
+    permissions-message: You don't have permission to list shops.
+  esadd:
+    description: Add a shop with the given shop name.
+    usage: /esadd <shop name>
+    permission: economysim.manage.add
+    permission-message: You don't have permission to add shops.
+  esremove:
+    description: Remove the shop with the given shop name.
+    usage: /esremove <shop name>
+    permissions: economysim.manage.remove
+    permissions-message: You don't have permission to remove shops.
+  esrename:
+    description: Set the given shop's display name to the given name.
+    usage: /esrename <shop name> <display name>
+    permissions: economysim.manage.rename
+    permissions-message: You don't have permission to rename shops.
+  esaddowner:
+    description: Add an owner to a shop.
+    usage: /esaddowner <shop name> <owner name>
+    permissions: economysim.manage.addowner
+    permissions-message: You don't have permission to add owners to shops. 
+  esrmowner:
+    description: Remove an owner from a shop.
+    usage: /esrmowner <shop name> <owner name>
+    permissions: economysim.manage.rmowner
+    permissions-message: You don't have permission to remove an owner from a shop. 
+  essetshop:
+    description: Set the shop of an EconomySim NPC.
+    usage: /essetshop [npc ID] <shop name>
+    permissions: economysim.manage.npc
+    permissions-message: You don't have permission to set NPC's shops.
+permissions:
+  economysim.*:
+    description: Gives access to all EconomySim commands.
+    children:
+      economysim.list: true
+      economysim.manage.*: true
+      economysim.admin: true
+  economysim.admin:
+    description: Gives permission to manage all shops, even if not owned by the player.
+    default: op
+  economysim.list:
+    description: Gives access to list the available shops.
+    default: true
+  economysim.manage.*:
+    description: Gives access to all shop management commands.
+    children:
+      economysim.manage.add: true
+      economysim.manage.remove: true
+      economysim.manage.rename: true
+      economysim.manage.addowner: true
+      economysim.manage.rmowner: true
+      economysim.manage.npc: true
+  economysim.manage.add:
+    description: Gives access to creating shops.
+    default: op
+  economysim.manage.remove:
+    description: Gives access to removing shops.
+    default: op
+  economysim.manage.rename:
+    description: Gives access to renaming shops.
+    default: op
+  economysim.manage.addowner:
+    description: Gives access to adding owners to shops.
+    default: op
+  economysim.manage.rmowner:
+    description: Gives access to removing owners from shops.
+    default: op  
+  economysim.manage.npc:
+    description: Gives access to setting NPC's shops.
+    default: op 
+    
