@@ -1,0 +1,3 @@
+numDecimals: 2
+maxPrice: 100.0
+priceUpdateSteepness: 0.05

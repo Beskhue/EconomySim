@@ -1,0 +1,79 @@
+words:
+    currency:
+        1: "%currencySingular"
+        other: "%currencyPlural"
+    itemWord:
+        1: "item"
+        other: "items"
+    unit:
+        1: "unit"
+        other: "units"
+    row:
+        1: "row"
+        other: "rows"
+    inventoryShopNameColor:
+        other: "&1"
+    player:
+        other: "&3%player&r"
+    shop:
+        other: "&3%shop&r"
+    shopDisplayName:
+        other: "&3%shopDisplayName&r"
+    shopNameInventory:
+        other: "&1%shopDisplayName&r"
+    amountColorPrefix:
+        other: "&6"
+    valueColorPrefix:
+        other: "&6"
+    item:
+        other: "&6%item%"
+messages:
+    commands:
+        shopAdded: "Shop &shop% added."
+        shopRemoved: "Shop &shop% removed."
+        shopAlreadyExists: "A shop with the name &shop% already exists." 
+        shopDoesNotExist: Shop &shop% does not exist."
+        shopListHeader: "Shops (unique name - display name):"
+        shopListShop: "&shop% - &shopDisplayName%"
+        shopListFooter: "==================================="
+        shopDisplayNameSet: "Display name has been set to &shopDisplayName% for shop &shop%."
+        doNotOwnShop: "You are not an owner of &shop%."
+        shopOwnerAdded: "&player% has been added as an owner for &shop%."
+        shopOwnerRemoved: "&player% has been removed as an owner from &shop%."
+        shopOwnerNotRemoved: "&player% was not removed; either they are not an owner or you are the last owner."
+        playerNotFound: "&player% was not found."
+        noNPCSelected: "You must have an NPC selected."
+        npcNotFound: "NPC with id %npcID was not found."
+        mustBePerformedOnTrait: "That command must be performed on an NPC with trait %trait."
+        npcShopSet: "%npc's shop was set to &shop%."
+        invalidCommand: "Invalid command. Type /help economysim for more information."
+    transactions:
+        welcome: "Welcome at &shopDisplayName%, &player%! Please have a look around."
+        soldItem: "You sold %amount &itemWord|amount% for %value &currency|value%."
+        boughtItem: "You bought &amountColorPrefix%%amount&r &unit|amount% of &item% for &valueColorPrefix%%value&r &currency|value%."
+        notEnoughMoney: "You do not have enough %currencyPlural to buy &amountColorPrefix%%amount&r &unit|amount% of &item%."
+        failed: "Transaction failed. Error: '%error'."
+        closeWelcome: "Pleasure doing business, &player%!"
+        closeSale: "Pleasure doing business, &player%!"
+        closeBuy: "Pleasure doing business, &player%!"
+    buttonDescriptions:
+        buyFromShop: "Buy items from &shopDisplayName%."
+        sellToShop: "Sell items to &shopDisplayName%."
+        confirmSale: "Confirm sale."
+        confirmSaleWithPrice: "Selling &amountColorPrefix%%amount&r &itemWord|amount% for &valueColorPrefix%%value&r &currency|value%.\nConfirm sale."
+        cancelSale: "Cancel sale and return all\nitems to your inventory."
+        buy: "Buy %item"
+        buyOne: "Click to buy 1.\nPrice: &valueColorPrefix%%priceOne&5&o &currency|priceOne%."
+        buyStack: "Click to buy 1.\nPrice: &valueColorPrefix%%priceOne&5&o &currency|priceOne%.\nShift-click to buy %stackSize.\nPrice: &valueColorPrefix%%priceStack&5&o &currency|priceStack%."
+        setNumRows: "Set the number of buy rows\nseen by a player when they\nbuy from &shopDisplayName%&5&o."
+        setInventory: "Set the inventory seen by a player\nwhen they buy from\n&shopDisplayName%&5&o."
+    inventoryHeaders:
+        welcome: "&shopNameInventory% - Welcome"
+        sell: "&shopNameInventory% - Sell items"
+        buy: "&shopNameInventory% - Buy items"
+        manage: "&shopNameInventory% - Manage"
+        manageItems: "&shopNameInventory% - Set Items"
+    conversations:
+        numBuyRows: "Please state the number of buy rows &shopDisplayName% should have."
+        numBuyRowsError: "Please state the number of buy rows &shopDisplayName% should have. The number of rows should be between &valueColorPrefix%1&r and &valueColorPrefix%6&r (inclusive)."
+        numBuyRowsSet: "&shopDisplayName% now has &amountColorPrefix%%num&r buy &row|num%." 
