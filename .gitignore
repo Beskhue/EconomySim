@@ -1,0 +1,15 @@
+/.classpath
+/.project
+/.settings
+/target
+
+/settings.xml
+/doc
+
+.DS_Store
+/*.iml
+/.idea
+
+/bin
+/dependency-reduced-pom.xml
+*-private.sh
