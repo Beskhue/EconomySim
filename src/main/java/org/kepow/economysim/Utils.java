@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -46,16 +47,27 @@ public class Utils
 	}
 	
 	/**
-	 * Calculate the logistic function value.
-	 * @param max Max value.
-	 * @param steepness Steepness.
-	 * @param x Value to calculate the function value for.
-	 * @param x0 Midpoint of function.
-	 * @return The logistic function value.
+	 * Find a player by their (last used) name, regardless of whether they are
+	 * online or offline.
+	 * @param name The name of the player.
+	 * @return The OfflinePlayer if they have been seen by the server, or null.
 	 */
-	public static double logisticFunction(double max, double steepness, double x, double x0)
+	public static OfflinePlayer getPlayer(String name)
 	{
-		return max / (1 + Math.pow(Math.E, -steepness * (x - x0)));
+		OfflinePlayer[] players = PluginState.getPlugin().getServer().getOfflinePlayers();
+		
+		OfflinePlayer ret = null;
+		
+		for(OfflinePlayer player : players)
+		{
+			if(player.getName().equalsIgnoreCase(name))
+			{
+				ret = player;
+				break;
+			}
+		}
+		
+		return ret;
 	}
 	
 	/**

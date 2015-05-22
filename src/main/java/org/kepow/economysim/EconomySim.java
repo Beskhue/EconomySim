@@ -35,7 +35,6 @@ public final class EconomySim extends JavaPlugin
 		ConfigurationSerialization.registerClass(WorldSimulator.class);
 		ConfigurationSerialization.registerClass(TransactionMovement.class);
 		
-		
 		PluginState.setPlugin(this);
 		PluginState.prepareCustomConfigs();
 		
@@ -52,11 +51,13 @@ public final class EconomySim extends JavaPlugin
 		// Set commands
         EconomySimCommandExecutor executor = new EconomySimCommandExecutor();
         
-		this.getCommand("eslist").setExecutor(executor);
-		this.getCommand("esadd").setExecutor(executor);
-		this.getCommand("esremove").setExecutor(executor);
-		this.getCommand("esrename").setExecutor(executor);
-		this.getCommand("essetshop").setExecutor(executor);
+		this.getCommand("esList").setExecutor(executor);
+		this.getCommand("esAdd").setExecutor(executor);
+		this.getCommand("esRemove").setExecutor(executor);
+		this.getCommand("esRename").setExecutor(executor);
+		this.getCommand("esAddOwner").setExecutor(executor);
+		this.getCommand("esRemoveOwner").setExecutor(executor);
+		this.getCommand("esSetShop").setExecutor(executor);
 		
 		
 		// Hook into citizens API 

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -80,20 +80,26 @@ public class Shop implements ConfigurationSerializable
 	 * @param player The player to check manage permission for.
 	 * @return True of the player is allowed to manage the shop, false otherwise.
 	 */
-	public boolean canManage(Player player)
+	public boolean canManage(OfflinePlayer player)
 	{
-		return player.hasPermission("economysim.admin") || owners.contains(player.getUniqueId().toString());
+		return player.getPlayer().hasPermission("economysim.admin") || owners.contains(player.getUniqueId().toString());
 	}
 	
 	/**
-	 * Add an owner to the shop.
+	 * Add an owner to the shop if they are not an owner already.
 	 * @param player The player to add as owner.
+	 * @ return True if the player was added, false otherwise.
 	 */
-	public void addOwner(Player player)
+	public boolean addOwner(OfflinePlayer player)
 	{
-		if(!owners.contains(player.getUniqueId()))
+		if(!owners.contains(player.getUniqueId().toString()))
 		{
 			owners.add(player.getUniqueId().toString());
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	
@@ -103,9 +109,9 @@ public class Shop implements ConfigurationSerializable
 	 * @param target The player to remove as owner.
 	 * @return True if the target player was removed, false otherwise.
 	 */
-	public boolean removeOwner(Player sender, Player target)
+	public boolean removeOwner(OfflinePlayer sender, OfflinePlayer target)
 	{
-		if(owners.size() <= 1 && !sender.hasPermission("economysim.admin"))
+		if(owners.size() <= 1 && !sender.getPlayer().hasPermission("economysim.admin"))
 		{	// Cannot remove the last owner, unless player is an admin
 			return false;
 		}
