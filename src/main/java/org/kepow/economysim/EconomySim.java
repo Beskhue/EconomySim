@@ -33,6 +33,7 @@ public final class EconomySim extends JavaPlugin
 		ConfigurationSerialization.registerClass(Shop.class);
 		ConfigurationSerialization.registerClass(Simulator.class);
 		ConfigurationSerialization.registerClass(WorldSimulator.class);
+		ConfigurationSerialization.registerClass(TransactionMovement.class);
 		
 		
 		PluginState.setPlugin(this);
@@ -58,7 +59,6 @@ public final class EconomySim extends JavaPlugin
 		this.getCommand("essetshop").setExecutor(executor);
 		
 		
-		
 		// Hook into citizens API 
 		if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) 
 		{
@@ -78,7 +78,8 @@ public final class EconomySim extends JavaPlugin
 		PluginState.setItemConfig(itemConfig);
 		
 		// Load world config
-		WorldConfig worldConfig = new WorldConfig(PluginState.getWorldsCustomConfig().getCustomConfig().getConfigurationSection("worldConfig").getValues(false));
+		//WorldConfig worldConfig = new WorldConfig(PluginState.getWorldsCustomConfig().getCustomConfig().getConfigurationSection("worldConfig").getValues(false));
+		WorldConfig worldConfig = new WorldConfig(getConfig().getConfigurationSection("worldConfig").getValues(false));
 		PluginState.setWorldConfig(worldConfig);
 		
 		// Load simulator
@@ -93,14 +94,38 @@ public final class EconomySim extends JavaPlugin
 		}
 		PluginState.setSimulator(simulator);
 		
-		// Set up scheduled saving
+		// Set up scheduled task
+		final long sleep = 20*60*5;
 		int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(PluginState.getPlugin(), new Runnable()
 		{ 
 			public void run() 
 			{
+				decay(sleep);
 				save();
 			} 
-		}, 20*60*5, 20*60*5);
+		}, sleep, sleep);
+	}
+	
+	/**
+	 * Perform transaction decay calculation.
+	 * @param interval The interval with which this calculation is performed.
+	 */
+	private void decay(long interval)
+	{
+		long day = 20*60*60*24;
+		double intervalsPerDay = day/interval;
+		
+		double buyDecayDay = getConfig().getDouble("simulator.buyDecayPerDay");
+		double sellDecayDay = getConfig().getDouble("simulator.saleDecayPerDay");
+		
+		// (1-decayInterval)^intervalsPerDay == (1-decayDay)
+		// 1-decayInterval = (1-decayDay)^(1/intervalsPerDay)
+		// decayInterval = 1-(1-decayDay)^(1/intervalsPerDay)
+		
+		double buyDecayInterval = 1-Math.pow(1-buyDecayDay, 1/intervalsPerDay);
+		double sellDecayInterval = 1-Math.pow(1-sellDecayDay, 1/intervalsPerDay);
+		
+		PluginState.getSimulator().performDecay(buyDecayInterval, sellDecayInterval);
 	}
 	
 	/**

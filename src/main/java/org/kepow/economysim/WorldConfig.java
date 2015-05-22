@@ -31,20 +31,28 @@ public class WorldConfig
 		groupsConfig = new HashMap<String, Map<String, Object>>();
 		
 		MemorySection groupsDataSection = (MemorySection)worldGroupsData.get("groups");
-		MemorySection groupsConfigDataSection = (MemorySection)worldGroupsData.get("groupConfig");
-		
+
 		Map<String, Object> groupsData = groupsDataSection.getValues(false);
 		for(String key : groupsData.keySet())
 		{
-			worldGroups.put(key, (List<String>) groupsData.get(key));
-		}
-		
-		Map<String, Object> groupsConfigData = groupsConfigDataSection.getValues(false);
-		for(String key : groupsConfigData.keySet())
-		{
-			MemorySection groupConfigDataSection = (MemorySection) groupsConfigData.get(key);
-			Map<String, Object> groupConfigData = groupConfigDataSection.getValues(false);
-			groupsConfig.put(key, groupConfigData);
+			//worldGroups.put(key, (List<String>) groupsData.get(key));
+			MemorySection groupDataSection = (MemorySection)groupsData.get(key);
+			Map<String, Object> groupData = groupDataSection.getValues(false);
+			
+			if(groupData.containsKey("config"))
+			{
+				MemorySection groupConfigDataSection = (MemorySection)groupData.get("config");
+				groupsConfig.put(key, groupConfigDataSection.getValues(false));
+			}
+			else
+			{
+				groupsConfig.put(key, new HashMap<String, Object>());
+			}
+			
+			if(groupData.containsKey("worlds"))
+			{
+				worldGroups.put(key, groupDataSection.getStringList("worlds"));
+			}
 		}
 	}
 	
@@ -111,9 +119,141 @@ public class WorldConfig
 		}
 		else
 		{
-			// Get default group base price
+			// Get default group setting
 			return (Double) groupsConfig.get(DEFAULT_GROUP).get("basePrice");
 		}
-		
+	}
+	
+	/**
+	 * Get the sell price steepness of a group.
+	 * @param group The group to get the sell price steepness for.
+	 * @return The sell price steepness of the group, or the default sell price steepness
+	 * if the group has no sell price steepness set.
+	 */
+	public double getSellPriceSteepness(String group)
+	{
+		if(groupsConfig.get(group).containsKey("sellPriceSteepness"))
+		{
+			return (Double) groupsConfig.get(group).get("sellPriceSteepness");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("sellPriceSteepness");
+		}
+	}
+	
+	/**
+	 * Get the buy price steepness of a group.
+	 * @param group The group to get the buy price steepness for.
+	 * @return The buy price steepness of the group, or the default buy price steepness
+	 * if the group has no buy price steepness set.
+	 */
+	public double getBuyPriceSteepness(String group)
+	{
+		if(groupsConfig.get(group).containsKey("buyPriceSteepness"))
+		{
+			return (Double) groupsConfig.get(group).get("buyPriceSteepness");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("buyPriceSteepness");
+		}
+	}
+	
+	/**
+	 * Get the buy price asymptote slope of a group.
+	 * @param group The group to get the buy price asymptote slope for.
+	 * @return The buy price asymptote slope of the group, or the default buy price asymptote slope
+	 * if the group has no buy price asymptote slope set.
+	 */
+	public double getBuyPriceAsymptoteSlope(String group)
+	{
+		if(groupsConfig.get(group).containsKey("buyPriceAsymptoteSlope"))
+		{
+			return (Double) groupsConfig.get(group).get("buyPriceAsymptoteSlope");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("buyPriceAsymptoteSlope");
+		}
+	}
+	
+	/**
+	 * Get the sell price factor of a group.
+	 * @param group The group to get the sell price factor for.
+	 * @return The sell price factor of the group, or the default sell price factor 
+	 * if the group has no sell price factor set.
+	 */
+	public double getSellPriceFactor(String group)
+	{
+		if(groupsConfig.get(group).containsKey("sellPriceFactor"))
+		{
+			return (Double) groupsConfig.get(group).get("sellPriceFactor");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("sellPriceFactor");
+		}
+	}
+	
+	/**
+	 * Get the buy price factor of a group.
+	 * @param group The group to get the buy price factor for.
+	 * @return The buy price factor of the group, or the default buy price factor 
+	 * if the group has no buy price factor set.
+	 */
+	public double getBuyPriceFactor(String group)
+	{
+		if(groupsConfig.get(group).containsKey("buyPriceFactor"))
+		{
+			return (Double) groupsConfig.get(group).get("buyPriceFactor");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("buyPriceFactor");
+		}
+	}
+	
+	/**
+	 * Get the sale decay per day of a group.
+	 * @param group The group to get the sale decay per day for.
+	 * @return The sale decay per day of the group, or the default sale decay per day 
+	 * if the group has no sale decay per day set.
+	 */
+	public double getSaleDecayPerDay(String group)
+	{
+		if(groupsConfig.get(group).containsKey("saleDecayPerDay"))
+		{
+			return (Double) groupsConfig.get(group).get("saleDecayPerDay");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("saleDecayPerDay");
+		}
+	}
+	
+	/**
+	 * Get the buy decay per day of a group.
+	 * @param group The group to get the buy decay per day for.
+	 * @return The buy decay per day of the group, or the default buy decay per day 
+	 * if the group has no buy decay per day set.
+	 */
+	public double getBuyDecayPerDay(String group)
+	{
+		if(groupsConfig.get(group).containsKey("buyDecayPerDay"))
+		{
+			return (Double) groupsConfig.get(group).get("buyDecayPerDay");	
+		}
+		else
+		{
+			// Get default group setting
+			return (Double) groupsConfig.get(DEFAULT_GROUP).get("buyDecayPerDay");
+		}
 	}
 }

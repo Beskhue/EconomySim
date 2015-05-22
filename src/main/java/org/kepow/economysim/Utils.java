@@ -134,7 +134,7 @@ public class Utils
 				} 
 				else if(obj instanceof Double)
 				{
-					double val = Utils.round((Double) obj, PluginState.getPlugin().getConfig().getInt("numDecimals"));
+					double val = Utils.round((Double) obj, PluginState.getPlugin().getConfig().getInt("display.numDecimals"));
 					
 					if ((val == Math.floor(val)) && !Double.isInfinite(val)) {
 					    int floor = (int) Math.floor(val);
@@ -208,7 +208,7 @@ public class Utils
 			} 
 			else if(obj instanceof Double)
 			{
-				replaceWith = String.format("%."+PluginState.getPlugin().getConfig().getInt("numDecimals")+"f", (Double) obj);
+				replaceWith = String.format("%."+PluginState.getPlugin().getConfig().getInt("display.numDecimals")+"f", (Double) obj);
 			}
 			else
 			{
