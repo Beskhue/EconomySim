@@ -1,3 +1,19 @@
-numDecimals: 2
-maxPrice: 100.0
-priceUpdateSteepness: 0.05
+display:
+    numDecimals: 2
+worldConfig:
+    groups:
+        default:
+            config:
+                basePrice: 2.5
+                sellPriceSteepness: 0.03
+                buyPriceSteepness: 0.03
+                buyPriceAsymptoteSlope: 0.02
+                sellPriceFactor: 1.0
+                buyPriceFactor: 1.0
+                saleDecayPerDay: 0.01
+                buyDecayPerDay: 0.1
+        survivalGroup:
+            worlds:
+            - world
+            - world_nether
+            - world_the_end

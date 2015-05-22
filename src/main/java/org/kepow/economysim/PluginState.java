@@ -9,14 +9,13 @@ package org.kepow.economysim;
 public final class PluginState 
 {
 	private static EconomySim plugin = null;
+	private static WorldConfig worldConfig = null;
 	private static Simulator simulator = null;
 	private static ShopList shopList = null;
-	private static WorldConfig worldConfig = null;
 	private static ItemConfig itemConfig = null;
 	
 	private static CustomConfig shopsCustomConfig;
 	private static CustomConfig simulatorCustomConfig;
-	private static CustomConfig worldsCustomConfig;
 	private static CustomConfig itemsCustomConfig;
 	private static CustomConfig messagesCustomConfig;
 	
@@ -27,13 +26,11 @@ public final class PluginState
 	{
 		PluginState.shopsCustomConfig = new CustomConfig("shops.yml");
 		PluginState.simulatorCustomConfig = new CustomConfig("simulator.yml");
-		PluginState.worldsCustomConfig = new CustomConfig("worlds.yml");
 		PluginState.itemsCustomConfig = new CustomConfig("items.yml");
 		PluginState.messagesCustomConfig = new CustomConfig("messages.yml");
 		
 		shopsCustomConfig.saveDefaultConfig();
 		simulatorCustomConfig.saveDefaultConfig();
-		worldsCustomConfig.saveDefaultConfig();
 		itemsCustomConfig.saveDefaultConfig();
 		messagesCustomConfig.saveDefaultConfig();
 	}
@@ -46,11 +43,6 @@ public final class PluginState
 	public static CustomConfig getSimulatorCustomConfig()
 	{
 		return PluginState.simulatorCustomConfig;
-	}
-	
-	public static CustomConfig getWorldsCustomConfig()
-	{
-		return PluginState.worldsCustomConfig;
 	}
 	
 	public static CustomConfig getItemsCustomConfig()

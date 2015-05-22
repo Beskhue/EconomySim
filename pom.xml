@@ -61,10 +61,4 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
- 
-  
-  <properties>
-    <!-- github server corresponds to entry in ~/settings.xml -->
-    <github.global.server>github</github.global.server>
-  </properties>
 </project>

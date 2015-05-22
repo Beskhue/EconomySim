@@ -15,7 +15,8 @@ import org.kepow.economysim.Simulator.TransactionType;
  */
 public class WorldSimulator implements ConfigurationSerializable
 {
-	Map<ItemStack, Integer> stock;
+	private Map<ItemStack, TransactionMovement> transactionMovement;
+	private String worldGroup = "default"; 
 	
 	/**
 	 * Constructor.
@@ -23,15 +24,25 @@ public class WorldSimulator implements ConfigurationSerializable
 	 */
 	public WorldSimulator(Map<String, Object> map)
 	{
-		stock = (Map<ItemStack, Integer>) map.get("stock");
+		transactionMovement = (Map<ItemStack, TransactionMovement>) map.get("transactionMovement");
 	}
 	
 	/**
 	 * Constructor.
 	 */
-	public WorldSimulator()
+	public WorldSimulator(String worldGroup)
 	{
-		stock = new HashMap<ItemStack, Integer>();
+		transactionMovement = new HashMap<ItemStack, TransactionMovement>();
+		this.worldGroup = worldGroup;
+	}
+	
+	/**
+	 * Set the world group this simulator is for.
+	 * @param worldGroup The world group.
+	 */
+	public void setWorldGroup(String worldGroup)
+	{
+		this.worldGroup = worldGroup;
 	}
 	
 	/**
@@ -73,15 +84,18 @@ public class WorldSimulator implements ConfigurationSerializable
 		
 		for(ItemConfig.ItemMap map : mapped.keySet())
 		{
-			int movement = mapped.get(map) * map.getRelativeValue();
+			int amount = mapped.get(map);
+			double movement = amount * map.getRelativeValue();
 			
-			if(stock.containsKey(map))
+			if(transactionMovement.containsKey(map))
 			{
-				stock.put(map.getItem(), stock.get(map) - movement);
+				transactionMovement.get(map.getItem()).addBuyMovement(movement);
 			}
 			else
 			{
-				stock.put(map.getItem(), -movement);
+				TransactionMovement trMovement = new TransactionMovement();
+				trMovement.addBuyMovement(movement);
+				transactionMovement.put(map.getItem(), trMovement);
 			}
 		}
 	}
@@ -96,16 +110,33 @@ public class WorldSimulator implements ConfigurationSerializable
 		
 		for(ItemConfig.ItemMap map : mapped.keySet())
 		{
-			int movement = mapped.get(map) * map.getRelativeValue();
+			int amount = mapped.get(map);
+			double movement = amount * map.getRelativeValue();
 			
-			if(stock.containsKey(map.getItem()))
+			if(transactionMovement.containsKey(map.getItem()))
 			{
-				stock.put(map.getItem(), stock.get(map.getItem()) + movement);
+				transactionMovement.get(map.getItem()).addSaleMovement(movement);
 			}
 			else
 			{
-				stock.put(map.getItem(), movement);
+				TransactionMovement trMovement = new TransactionMovement();
+				trMovement.addSaleMovement(movement);
+				transactionMovement.put(map.getItem(), trMovement);
 			}
+		}
+	}
+	
+	/**
+	 * Perform decay on the transaction amounts.
+	 * @param buyDecay Factor to decay buy transactions with.
+	 * @param sellDecay Factor to decay sale transactions with.
+	 */
+	public void performDecay(double buyDecay, double sellDecay)
+	{
+		for(TransactionMovement transactionMovement : this.transactionMovement.values())
+		{
+			transactionMovement.decayBuyMovement(buyDecay);
+			transactionMovement.decaySaleMovement(sellDecay);
 		}
 	}
 	
@@ -116,41 +147,59 @@ public class WorldSimulator implements ConfigurationSerializable
 	 */
 	public double getPrice(ItemStack[] items, TransactionType type)
 	{
-		// Make a copy to keep track of simulated amounts
-		Map<ItemStack, Integer> stockCopy = new HashMap<ItemStack, Integer>(stock);
+		// Make a deep copy to keep track of simulated amounts
+		Map<ItemStack, TransactionMovement> transactionMovementCopy = new HashMap<ItemStack, TransactionMovement>();
+		for(ItemStack item : this.transactionMovement.keySet())
+		{
+			TransactionMovement copy = new TransactionMovement(this.transactionMovement.get(item));
+			transactionMovementCopy.put(item, copy);
+		}
 		
 		Map<ItemConfig.ItemMap, Integer> mapped = getMappedItemStacks(items);
 		
 		double price = 0;
-		double maxPrice = PluginState.getPlugin().getConfig().getDouble("maxPrice");
-		double steepness = PluginState.getPlugin().getConfig().getDouble("priceUpdateSteepness");
+		//double basePrice = PluginState.getPlugin().getConfig().getDouble("simulator.basePrice");
+		double basePrice = PluginState.getWorldConfig().getBasePrice(this.worldGroup);
+		
+		//double sellPriceSteepness = PluginState.getPlugin().getConfig().getDouble("simulator.sellPriceSteepness");
+		double sellPriceSteepness = PluginState.getWorldConfig().getSellPriceSteepness(this.worldGroup);
+		
+		//double buyPriceSteepness = PluginState.getPlugin().getConfig().getDouble("simulator.buyPriceSteepness");
+		double buyPriceSteepness = PluginState.getWorldConfig().getBuyPriceSteepness(this.worldGroup);
+		
+		//double buyPriceAsymptote = PluginState.getPlugin().getConfig().getDouble("simulator.buyPriceAsymptoteSlope");
+		double buyPriceAsymptote = PluginState.getWorldConfig().getBuyPriceAsymptoteSlope(this.worldGroup);
+		
+		//double sellPriceFactor = PluginState.getPlugin().getConfig().getDouble("simulator.sellPriceFactor");
+		double sellPriceFactor = PluginState.getWorldConfig().getSellPriceFactor(this.worldGroup);
+		
+		//double buyPriceFactor = PluginState.getPlugin().getConfig().getDouble("simulator.buyPriceFactor");
+		double buyPriceFactor = PluginState.getWorldConfig().getBuyPriceFactor(this.worldGroup);
 		
 		
 		for(ItemConfig.ItemMap map : mapped.keySet())
 		{
-			int amount = mapped.get(map) * map.getRelativeValue();
+			double amount = mapped.get(map) * map.getRelativeValue();
 			
-			int stock = 0;
-			if(stockCopy.containsKey(map.getItem()))
+			TransactionMovement movement;
+			if(transactionMovementCopy.containsKey(map.getItem()))
 			{
-				stock = stockCopy.get(map.getItem());
+				movement = transactionMovementCopy.get(map.getItem());
+			}
+			else
+			{
+				movement = new TransactionMovement();
 			}
 			
-			for(int i = 0; i < amount; ++i)
-			{
-				if(type == TransactionType.BUY)
-				{
-					price += (maxPrice * Math.pow(Utils.logisticFunction(1, steepness, -stock, 0), 2)) * map.getHealth();
-					--stock;
-				}
-				else
-				{
-					++stock;
-					price += (maxPrice * Math.pow(Utils.logisticFunction(1, steepness, -stock, 0), 2)) * map.getHealth();
-				}
-			}
+			price += Simulator.getTransactionPrice(type, 
+					amount, 
+					movement.getDemand(), 
+					basePrice, 
+					sellPriceSteepness, buyPriceSteepness, 
+					buyPriceAsymptote, 
+					sellPriceFactor, buyPriceFactor);
 			
-			stockCopy.put(map.getItem(), stock);
+			movement.addMovement(amount, type);
 		}
 		
 		return price;
@@ -163,7 +212,7 @@ public class WorldSimulator implements ConfigurationSerializable
 	public Map<String, Object> serialize() 
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("stock", stock);
+		map.put("transactionMovement", transactionMovement);
 		
 		return map;
 	}

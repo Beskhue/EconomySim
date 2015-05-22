@@ -26,7 +26,7 @@ words:
     valueColorPrefix:
         other: "&6"
     item:
-        other: "&6%item%"
+        other: "&6%item&r"
 messages:
     commands:
         shopAdded: "Shop &shop% added."
@@ -48,7 +48,7 @@ messages:
         npcShopSet: "%npc's shop was set to &shop%."
         invalidCommand: "Invalid command. Type /help economysim for more information."
     transactions:
-        welcome: "Welcome at &shopDisplayName%, &player%! Please have a look around."
+        welcome: "Welcome to &shopDisplayName%, &player%! Please have a look around."
         soldItem: "You sold %amount &itemWord|amount% for %value &currency|value%."
         boughtItem: "You bought &amountColorPrefix%%amount&r &unit|amount% of &item% for &valueColorPrefix%%value&r &currency|value%."
         notEnoughMoney: "You do not have enough %currencyPlural to buy &amountColorPrefix%%amount&r &unit|amount% of &item%."
