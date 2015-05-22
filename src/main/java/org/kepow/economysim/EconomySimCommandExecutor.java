@@ -6,6 +6,7 @@ import net.citizensnpcs.Citizens;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -125,11 +126,18 @@ public class EconomySimCommandExecutor implements CommandExecutor
     				if(shop.canManage(player))
     				{
     					String target = args[1];
-    					Player targetPlayer = PluginState.getPlugin().getServer().getPlayer(target);
+    					
+    					OfflinePlayer targetPlayer = Utils.getPlayer(target);
     					if(targetPlayer != null)
     					{
-    						shop.addOwner(targetPlayer);
-    						sender.sendMessage(Utils.prepareMessage("commands.shopOwnerAdded", "%shop", shopName, "%player", targetPlayer.getName()));
+    						if(shop.addOwner(targetPlayer))
+    						{
+    							sender.sendMessage(Utils.prepareMessage("commands.shopOwnerAdded", "%shop", shopName, "%player", targetPlayer.getName()));
+    						}
+    						else
+    						{
+    							sender.sendMessage(Utils.prepareMessage("commands.shopOwnerNotAdded", "%shop", shopName, "%player", targetPlayer.getName()));
+    						}
     					}
     					else
     					{
@@ -146,7 +154,7 @@ public class EconomySimCommandExecutor implements CommandExecutor
     				sender.sendMessage(Utils.prepareMessage("commands.shopDoesNotExist", "%shop", shopName));
     			}
     		}
-    		else if(command.getLabel().equals("esrmowner"))
+    		else if(command.getLabel().equals("esremoveowner"))
     		{
     			String shopName = args[0];
     			Shop shop = PluginState.getShopList().get(shopName);
@@ -155,7 +163,7 @@ public class EconomySimCommandExecutor implements CommandExecutor
     				if(shop.canManage(player))
     				{
     					String target = args[1];
-    					Player targetPlayer = PluginState.getPlugin().getServer().getPlayer(target);
+    					OfflinePlayer targetPlayer = Utils.getPlayer(target);
     					if(targetPlayer != null)
     					{
     						if(shop.removeOwner(player, targetPlayer))

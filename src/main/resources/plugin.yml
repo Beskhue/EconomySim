@@ -7,39 +7,39 @@ authors: [Beskhue]
 depend: [Vault]
 softdepend: [Citizens]
 commands:
-  eslist:
+  esList:
     description: List all available shops.
-    usage: /eslist
+    usage: /esList
     permissions: economysim.list
     permissions-message: You don't have permission to list shops.
-  esadd:
+  esAdd:
     description: Add a shop with the given shop name.
-    usage: /esadd <shop name>
+    usage: /esAdd <shop name>
     permission: economysim.manage.add
     permission-message: You don't have permission to add shops.
-  esremove:
+  esRemove:
     description: Remove the shop with the given shop name.
-    usage: /esremove <shop name>
+    usage: /esRemove <shop name>
     permissions: economysim.manage.remove
     permissions-message: You don't have permission to remove shops.
-  esrename:
+  esRename:
     description: Set the given shop's display name to the given name.
-    usage: /esrename <shop name> <display name>
+    usage: /esRename <shop name> <display name>
     permissions: economysim.manage.rename
     permissions-message: You don't have permission to rename shops.
-  esaddowner:
+  esAddOwner:
     description: Add an owner to a shop.
-    usage: /esaddowner <shop name> <owner name>
+    usage: /esAddOwner <shop name> <owner name>
     permissions: economysim.manage.addowner
     permissions-message: You don't have permission to add owners to shops. 
-  esrmowner:
+  esRemoveOwner:
     description: Remove an owner from a shop.
-    usage: /esrmowner <shop name> <owner name>
-    permissions: economysim.manage.rmowner
+    usage: /esRemoveOwner <shop name> <owner name>
+    permissions: economysim.manage.removeowner
     permissions-message: You don't have permission to remove an owner from a shop. 
-  essetshop:
+  esSetShop:
     description: Set the shop of an EconomySim NPC.
-    usage: /essetshop [npc ID] <shop name>
+    usage: /esSetShop [npc ID] <shop name>
     permissions: economysim.manage.npc
     permissions-message: You don't have permission to set NPC's shops.
 permissions:
@@ -62,7 +62,7 @@ permissions:
       economysim.manage.remove: true
       economysim.manage.rename: true
       economysim.manage.addowner: true
-      economysim.manage.rmowner: true
+      economysim.manage.removeowner: true
       economysim.manage.npc: true
   economysim.manage.add:
     description: Gives access to creating shops.
@@ -76,7 +76,7 @@ permissions:
   economysim.manage.addowner:
     description: Gives access to adding owners to shops.
     default: op
-  economysim.manage.rmowner:
+  economysim.manage.removeowner:
     description: Gives access to removing owners from shops.
     default: op  
   economysim.manage.npc:
