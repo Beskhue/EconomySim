@@ -323,8 +323,6 @@ public class Menu implements Listener
 	{
 		if (event.getInventory().equals(this.inventory)) 
 		{
-			event.getWhoClicked().sendMessage("You dragged");
-			
 			if(!allowPlaceItems)
 			{
 				Set<Integer> slots = event.getRawSlots();
