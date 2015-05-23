@@ -1,5 +1,8 @@
 package org.kepow.economysim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -21,6 +24,7 @@ public final class EconomySim extends JavaPlugin
 	public static Economy economy = null;
 	public static Permission permissions = null;
 	public static Chat chat = null;
+	private List<Menu> openMenus;
 	
 	/**
 	 * Called when the plugin has been loaded and is enabled.
@@ -28,6 +32,8 @@ public final class EconomySim extends JavaPlugin
 	@Override
 	public void onEnable()
 	{
+		this.openMenus = new ArrayList<Menu>();
+		
 		this.saveDefaultConfig();
 		ConfigurationSerialization.registerClass(ShopList.class);
 		ConfigurationSerialization.registerClass(Shop.class);
@@ -147,7 +153,43 @@ public final class EconomySim extends JavaPlugin
 	@Override
 	public void onDisable()
 	{
+		// Close all menus, so that players cannot take items from the inventories after
+		// the plugin has been disabled.
+		while(openMenus.size() > 0)
+		{	
+			openMenus.get(0).close();
+		}
+		
 		save();
+	}
+	
+	/**
+	 * Register a menu in the open menus.
+	 * @param menu The menu to register.
+	 */
+	public void registerMenu(Menu menu)
+	{
+		openMenus.add(menu);
+	}
+	
+	/**
+	 * Unregister a menu from the open menus.
+	 * @param menu The menu to unregister.
+	 */
+	public void unregisterMenu(Menu menu)
+	{
+		openMenus.remove(menu);
+	}
+	
+	/**
+	 * Call to let all open menus update.
+	 */
+	public void updateAllMenus()
+	{
+		for(Menu menu : openMenus)
+		{
+			menu.updateButtons();
+		}
 	}
 	
     private boolean setupEconomy() 

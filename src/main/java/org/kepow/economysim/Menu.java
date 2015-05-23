@@ -160,6 +160,7 @@ public class Menu implements Listener
 	public void show(Player player)
 	{
 		player.openInventory(inventory);
+		PluginState.getPlugin().registerMenu(this);
 	}
 	
 	/**
@@ -214,7 +215,7 @@ public class Menu implements Listener
 	}
 	
 	/**
-	 * Close the inventory for all viewers (but does not destroy the inventory!)
+	 * Close the inventory for all viewers.
 	 */
 	public void close()
 	{
@@ -226,9 +227,10 @@ public class Menu implements Listener
 	}
 	
 	/**
-	 * Destroy this menu. 
+	 * Destroy this menu, should only be called when the menu inventory has been
+	 * closed.
 	 */
-	public void destroy()
+	private void destroy()
 	{
 		HandlerList.unregisterAll(this);
 	}
@@ -286,6 +288,8 @@ public class Menu implements Listener
     {
     	if (event.getInventory().equals(this.inventory)) 
 		{
+    		PluginState.getPlugin().unregisterMenu(this);
+    		
 	    	for(MenuListener listener : listeners)
 	    	{
 	    		listener.onMenuInventoryClose(this, event);

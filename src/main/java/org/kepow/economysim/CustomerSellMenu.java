@@ -75,6 +75,7 @@ public class CustomerSellMenu extends ShopMenu implements MenuListener
 					CustomerSellMenu.this.confirmedSale = true;
 					
 					PluginState.getSimulator().addSaleMovement(worldGroup, items);
+					PluginState.getPlugin().updateAllMenus();
 					
 					player.sendMessage(Utils.prepareMessage("transactions.soldItem", 
 							"%amount", items.length, 
