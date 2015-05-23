@@ -108,6 +108,7 @@ public class MenuBuyItemButton extends MenuButton implements MenuButtonListener
 				Utils.giveItems(player, new ItemStack[]{buy});
 				
 				PluginState.getSimulator().addBuyMovement(worldGroup, new ItemStack[]{buy});
+				PluginState.getPlugin().updateAllMenus();
 				
 				player.sendMessage(Utils.prepareMessage("transactions.boughtItem", 
 						"%amount", buyAmount, 
