@@ -9,17 +9,17 @@ package org.kepow.economysim;
  */
 public class Tuple<T1, T2> 
 {
-	public final T1 t1;
-	public final T2 t2;
-	
-	/**
-	 * Constructor.
-	 * @param t1 First object contained in the tuple.
-	 * @param t2 Second object contained in the tuple.
-	 */
-	public Tuple(T1 t1, T2 t2)
-	{
-		this.t1 = t1;
-		this.t2 = t2;
-	}
+    public final T1 t1;
+    public final T2 t2;
+
+    /**
+     * Constructor.
+     * @param t1 First object contained in the tuple.
+     * @param t2 Second object contained in the tuple.
+     */
+    public Tuple(T1 t1, T2 t2)
+    {
+        this.t1 = t1;
+        this.t2 = t2;
+    }
 }
