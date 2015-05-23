@@ -288,7 +288,7 @@ public class Menu implements Listener
     {
     	if (event.getInventory().equals(this.inventory)) 
 		{
-    		PluginState.getPlugin().unregisterMenu(this);
+    		PluginState.getPlugin().deregisterMenu(this);
     		
 	    	for(MenuListener listener : listeners)
 	    	{

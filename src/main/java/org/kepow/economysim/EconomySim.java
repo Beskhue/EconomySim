@@ -173,10 +173,10 @@ public final class EconomySim extends JavaPlugin
 	}
 	
 	/**
-	 * Unregister a menu from the open menus.
+	 * Deregister a menu from the open menus.
 	 * @param menu The menu to unregister.
 	 */
-	public void unregisterMenu(Menu menu)
+	public void deregisterMenu(Menu menu)
 	{
 		openMenus.remove(menu);
 	}
