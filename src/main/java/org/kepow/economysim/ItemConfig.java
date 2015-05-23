@@ -28,7 +28,7 @@ public class ItemConfig
 	public class ItemMap
 	{
 		private ItemStack item;
-		private int relativeValue;
+		private double relativeValue;
 		private double health;
 		
 		/**
@@ -66,7 +66,7 @@ public class ItemConfig
 		 * @param relativeValue The relative value of the original item to the item stack represented by the map.
 		 * @param health The health of the original item (the item stack represented should always have a health of 100%).
 		 */
-		public ItemMap(ItemStack item, int relativeValue, double health)
+		public ItemMap(ItemStack item, double relativeValue, double health)
 		{
 			this.item = item;
 			this.relativeValue = relativeValue;
@@ -78,7 +78,7 @@ public class ItemConfig
 		 * @param map A tuple containing an item stack the map should represent and the relative value of the original item 
 		 * to the item stack represented by the map. 
 		 */
-		public ItemMap(Tuple<ItemStack, Integer> map)
+		public ItemMap(Tuple<ItemStack, Double> map)
 		{
 			this(map, 1.0);
 		}
@@ -89,7 +89,7 @@ public class ItemConfig
 		 * to the item stack represented by the map. 
 		 * @param health The health of the original item (the item stack represented should always have a health of 100%).
 		 */
-		public ItemMap(Tuple<ItemStack, Integer> map, double health)
+		public ItemMap(Tuple<ItemStack, Double> map, double health)
 		{
 			this(map.t1, map.t2, health);
 		}
@@ -99,7 +99,7 @@ public class ItemConfig
 			return this.item;
 		}
 		
-		public int getRelativeValue()
+		public double getRelativeValue()
 		{
 			return this.relativeValue;
 		}
@@ -126,7 +126,7 @@ public class ItemConfig
 		{
 			int hash = 1;
 			hash = hash * 17 + item.toString().hashCode();
-			hash = hash * 31 + relativeValue;
+			hash = hash * 31 + (int) (relativeValue * 100);
 			hash = hash * 13 + (int) (health * 100);
 			
 			return hash;
@@ -135,7 +135,7 @@ public class ItemConfig
 	
 	private Map<ItemStack, String> mapToGroup;
 	private Map<String, Boolean> groupAllDataTypes;
-	private Map<ItemStack, Tuple<ItemStack, Integer>> mapTo;
+	private Map<ItemStack, Tuple<ItemStack, Double>> mapTo;
 	
 	/**
 	 * Constructor.
@@ -145,7 +145,7 @@ public class ItemConfig
 	{
 		mapToGroup = new HashMap<ItemStack, String>();
 		groupAllDataTypes = new HashMap<String, Boolean>();
-		mapTo = new HashMap<ItemStack, Tuple<ItemStack, Integer>>();
+		mapTo = new HashMap<ItemStack, Tuple<ItemStack, Double>>();
 		
 		for(String group : itemGroupsData.keySet())
 		{
@@ -166,14 +166,14 @@ public class ItemConfig
 				{
 					ItemStack itemStack = (ItemStack) item.get("item");
 					mapToGroup.put(itemStack, group);
-					int relativeValue = 1;
+					double relativeValue = 1;
 					
 					if(item.containsKey("relativeValue"))
 					{
-						relativeValue = (Integer) item.get("relativeValue");
+						relativeValue = ((Number) item.get("relativeValue")).doubleValue();
 					}
 					
-					mapTo.put(itemStack, new Tuple<ItemStack,Integer>(prototypeItem, relativeValue));
+					mapTo.put(itemStack, new Tuple<ItemStack,Double>(prototypeItem, relativeValue));
 				}
 			}
 		}
