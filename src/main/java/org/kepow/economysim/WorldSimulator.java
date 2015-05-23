@@ -87,7 +87,7 @@ public class WorldSimulator implements ConfigurationSerializable
 			int amount = mapped.get(map);
 			double movement = amount * map.getRelativeValue();
 			
-			if(transactionMovement.containsKey(map))
+			if(transactionMovement.containsKey(map.getItem()))
 			{
 				transactionMovement.get(map.getItem()).addBuyMovement(movement);
 			}
