@@ -1,10 +1,356 @@
 itemGroups:
-    woolGroup: 
+    oakWoodGroup:
         items:
             - item:
                 ==: org.bukkit.inventory.ItemStack
-                type: WOOL
-        allDataTypes: 1
+                type: WOOD
+                damage: 0
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LOG
+                damage: 0
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STAIRS
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STEP
+                damage: 0
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_DOOR
+              relativeValue: 2
+    spruceWoodGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD
+                damage: 1
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LOG
+                damage: 1
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SPRUCE_WOOD_STAIRS
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STEP
+                damage: 1
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SPRUCE_DOOR_ITEM
+              relativeValue: 2
+    birchWoodGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD
+                damage: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LOG
+                damage: 2
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: BIRCH_WOOD_STAIRS
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STEP
+                damage: 2
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: BIRCH_DOOR_ITEM
+              relativeValue: 2
+    jungleWoodGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD
+                damage: 3
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LOG
+                damage: 3
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: JUNGLE_WOOD_STAIRS
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STEP
+                damage: 3
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: JUNGLE_DOOR_ITEM
+              relativeValue: 2
+    acaciaWoodGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD
+                damage: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LOG_2
+                damage: 0
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: ACACIA_STAIRS
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STEP
+                damage: 4
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: ACACIA_DOOR_ITEM
+              relativeValue: 2
+    darkOakWoodGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD
+                damage: 5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LOG_2
+                damage: 1
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: DARK_OAK_STAIRS
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: WOOD_STEP
+                damage: 5
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: DARK_OAK_DOOR_ITEM
+              relativeValue: 2
+    cobbleStoneGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: COBBLESTONE
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: COBBLE_WALL
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STEP
+                damage: 3
+              relativeValue: 0.5  
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: COBBLESTONE_STAIRS
+              relativeValue: 1.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: FURNACE
+              relativeValue: 8
+    brickGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: CLAY_BRICK
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: BRICK
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STEP
+                damage: 4
+              relativeValue: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: BRICK_STAIRS
+              relativeValue: 6
+    stoneGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STONE
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SMOOTH_BRICK
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SMOOTH_BRICK
+                damage: 3
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STEP
+                damage: 0
+              relativeValue: 0.5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STONE_BUTTON
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STONE_PLATE
+              relativeValue: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SMOOTH_STAIRS
+              relativeValue: 6
+    sandGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SAND
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SANDSTONE
+                damage: 0
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SANDSTONE
+                damage: 1
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SANDSTONE
+                damage: 2
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STEP
+                damage: 1
+              relativeValue: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SANDSTONE_STAIRS
+              relativeValue: 6
+    redSandGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: SAND
+                damage: 1
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: RED_SANDSTONE
+                damage: 0
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: RED_SANDSTONE
+                damage: 1
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: RED_SANDSTONE
+                damage: 2
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STONE_SLAB2
+                damage: 0
+              relativeValue: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: RED_SANDSTONE_STAIRS
+              relativeValue: 6
+    netherBrickGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: NETHER_BRICK_ITEM
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: NETHER_BRICK
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STEP
+                damage: 6
+              relativeValue: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: NETHER_FENCE
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: NETHER_BRICK_STAIRS
+              relativeValue: 6
+    quartzGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: QUARTZ
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: QUARTZ_BLOCK
+                damage: 0
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: QUARTZ_BLOCK
+                damage: 1
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: QUARTZ_BLOCK
+                damage: 2
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STEP
+                damage: 7
+              relativeValue: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: QUARTZ_STAIRS
+              relativeValue: 6
+    lapisGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: INK_SACK
+                damage: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: LAPIS_BLOCK
+              relativeValue: 9
+    ironGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: IRON_INGOT
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: IRON_BLOCK
+              relativeValue: 9
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: IRON_DOOR
+              relativeValue: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: IRON_TRAPDOOR
+              relativeValue: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: IRON_FENCE
+              relativeValue: 6
     diamondGroup:
         items:
             - item:
@@ -14,3 +360,206 @@ itemGroups:
                 ==: org.bukkit.inventory.ItemStack
                 type: DIAMOND_BLOCK
               relativeValue: 9
+    coalGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: COAL
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: COAL_BLOCK
+              relativeValue: 9
+    redstoneGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: REDSTONE
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: REDSTONE_BLOCK
+              relativeValue: 9
+    glassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: THIN_GLASS
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: GLASS
+              relativeValue: 2.666667
+    whiteStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 0
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 0
+              relativeValue: 2.666667
+    orangeStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 1
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 1
+              relativeValue: 2.666667
+    magentaStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 2
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 2
+              relativeValue: 2.666667
+    lightBlueStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 3
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 3
+              relativeValue: 2.666667
+    yellowStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 4
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 4
+              relativeValue: 2.666667       
+    limeStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 5
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 5
+              relativeValue: 2.666667
+    pinkStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 6
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 6
+              relativeValue: 2.666667
+    grayStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 7
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 7
+              relativeValue: 2.666667
+    lightGrayStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 8
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 8
+              relativeValue: 2.666667
+    cyanStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 9
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 9
+              relativeValue: 2.666667
+    purpleStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 10
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 10
+              relativeValue: 2.666667
+    blueStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 11
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 11
+              relativeValue: 2.666667
+    brownStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 12
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 12
+              relativeValue: 2.666667
+    greenStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 13
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 13
+              relativeValue: 2.666667
+    redStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 14
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 14
+              relativeValue: 2.666667
+    blackStainedGlassGroup:
+        items:
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS_PANE
+                damage: 15
+            - item:
+                ==: org.bukkit.inventory.ItemStack
+                type: STAINED_GLASS
+                damage: 15
+              relativeValue: 2.666667
