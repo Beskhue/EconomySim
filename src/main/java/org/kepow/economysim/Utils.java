@@ -146,7 +146,7 @@ public class Utils
                 } 
                 else if(obj instanceof Double)
                 {
-                    double val = Utils.round((Double) obj, PluginState.getPlugin().getConfig().getInt("display.numDecimals"));
+                    double val = Utils.round((Double) obj, PluginState.getPlugin().getConfig().getInt("display.numberOfDecimals"));
 
                     if ((val == Math.floor(val)) && !Double.isInfinite(val)) {
                         int floor = (int) Math.floor(val);
