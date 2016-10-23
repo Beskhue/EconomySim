@@ -1,6 +1,6 @@
 name: EconomySim
 main: org.kepow.economysim.EconomySim
-version: 0.2
+version: 0.3
 description: Dynamic economy simulator and shopping interface.
 author: Beskhue
 authors: [Beskhue]

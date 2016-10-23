@@ -109,7 +109,11 @@ public class MenuButton
     public void onShopButtonClick(Menu menu, InventoryClickEvent event)
     {
         Player player = (Player)event.getWhoClicked();
-        player.playSound(player.getLocation(), Sound.CLICK, 10, 1);
+        try {
+        	player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 10, 1);
+        } finally {
+        	// Click sound not found, do nothing
+        }
         if(this.listener != null)
         {
             this.listener.onMenuButtonClick(menu, this, event);
