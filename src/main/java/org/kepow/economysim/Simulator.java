@@ -123,6 +123,7 @@ public class Simulator implements ConfigurationSerializable
      * @param amount The transaction movement (e.g., 50 bought or 20 sold)
      * @param demand The demand at the start of the transaction.
      * @param basePrice The base price (i.e., price at 0 demand)
+     * @param minPricePerStack The minimum price per stack.
      * @param sellPriceSteepness The logistic function steepness below 0.
      * @param buyPriceSteepness The logistic function steepness above 0.
      * @param buyPriceAsymptote The extra slope's steepness ("asymptote slope")
@@ -132,7 +133,7 @@ public class Simulator implements ConfigurationSerializable
      * @return The price for the transaction.
      */
     public static double getTransactionPrice(TransactionType type,
-        double amount, double demand, double basePrice,
+        double amount, double demand, double basePrice, double minPricePerStack,
         double sellPriceSteepness, double buyPriceSteepness,
         double buyPriceAsymptote, double sellPriceFactor, double buyPriceFactor)
     {
@@ -160,6 +161,7 @@ public class Simulator implements ConfigurationSerializable
                     -lowDemand, // e.g. from -50 to 0 (start = -50, amount = --50 = 50)
                     lowDemand, 
                     basePrice, 
+                    minPricePerStack,
                     sellPriceSteepness, 
                     buyPriceSteepness,
                     buyPriceAsymptote, 
@@ -172,6 +174,7 @@ public class Simulator implements ConfigurationSerializable
                         highDemand,
                         0, // e.g. from 0 to 50 (start = 0, amount = 50)
                         basePrice, 
+                        minPricePerStack,
                         sellPriceSteepness, 
                         buyPriceSteepness,
                         buyPriceAsymptote, 
@@ -219,6 +222,12 @@ public class Simulator implements ConfigurationSerializable
             }
         }
 
+        // Check if the minimum price is met, and if not set the price to the minimum price 
+        if(price / amount * 64 < minPricePerStack) 
+        {
+        	price = minPricePerStack / 64 * amount;
+        }
+        
         return price;
     }
 

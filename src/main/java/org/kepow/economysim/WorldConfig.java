@@ -123,6 +123,25 @@ public class WorldConfig
             return (Double) groupsConfig.get(DEFAULT_GROUP).get("basePrice");
         }
     }
+    
+    /**
+     * Get the minimum price per stack of a group.
+     * @param group The group to get the minimum price for.
+     * @return The minimum price per stack of the group, or the default minimum price
+     * if the group has no minimum price set.
+     */
+    public double getMinPricePerStack(String group)
+    {
+        if(groupsConfig.get(group).containsKey("minPricePerStack"))
+        {
+            return (Double) groupsConfig.get(group).get("minPricePerStack");	
+        }
+        else
+        {
+            // Get default group setting
+            return (Double) groupsConfig.get(DEFAULT_GROUP).get("minPricePerStack");
+        }
+    }
 
     /**
      * Get the sell price steepness of a group.

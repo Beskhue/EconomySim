@@ -160,7 +160,9 @@ public class WorldSimulator implements ConfigurationSerializable
         double price = 0;
         //double basePrice = PluginState.getPlugin().getConfig().getDouble("simulator.basePrice");
         double basePrice = PluginState.getWorldConfig().getBasePrice(this.worldGroup);
-
+        
+        double minPricePerStack = PluginState.getWorldConfig().getMinPricePerStack(this.worldGroup);
+        
         //double sellPriceSteepness = PluginState.getPlugin().getConfig().getDouble("simulator.sellPriceSteepness");
         double sellPriceSteepness = PluginState.getWorldConfig().getSellPriceSteepness(this.worldGroup);
 
@@ -195,6 +197,7 @@ public class WorldSimulator implements ConfigurationSerializable
                 amount, 
                 movement.getDemand(), 
                 basePrice, 
+                minPricePerStack,
                 sellPriceSteepness, buyPriceSteepness, 
                 buyPriceAsymptote, 
                 sellPriceFactor, buyPriceFactor);

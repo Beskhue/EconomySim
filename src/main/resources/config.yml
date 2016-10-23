@@ -5,6 +5,7 @@ worldConfig:
         default:
             config:
                 basePrice: 2.5
+                minPricePerStack: 0.1
                 sellPriceSteepness: 0.03
                 buyPriceSteepness: 0.03
                 buyPriceAsymptoteSlope: 0.02
